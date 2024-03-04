@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class SuggestV1 implements Suggestable {
   private final WebClientFactory webClientFactory;
-  private final RequestFactory requestFactory;
+  private final SuggestRequestFactory requestFactory;
 
   @Override
   public Mono<ResponseChatDto> suggest() {

@@ -1,12 +1,15 @@
 package com.tistory.chefgpt.util.api;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class WebClientFactory {
   public enum App {
     SUGGEST("https://api.openai.com/v1/chat/completions"),
@@ -28,12 +31,24 @@ public class WebClientFactory {
   private final Secrets secrets;
 
   public WebClient create(final App app) {
+    log.info("WebClient Created");
     WebClient.Builder res = WebClient.builder().baseUrl(app.getUrl());
     return switch (app) {
-      case SUGGEST, IMAGE -> res
+      case SUGGEST -> res
           .defaultHeader(
               HttpHeaders.AUTHORIZATION,
               "Bearer " + this.secrets.getOpenAi().getApiKey()
+          ).build();
+      case IMAGE -> res
+          .defaultHeader(
+              HttpHeaders.AUTHORIZATION,
+              "Bearer " + this.secrets.getOpenAi().getApiKey()
+          ).exchangeStrategies(
+              ExchangeStrategies.builder()
+                  .codecs(c -> c.defaultCodecs().maxInMemorySize(
+                      16 * 1024 * 1024  //  16Mb
+                  ))
+                  .build()
           ).build();
       case POSTING -> res
           .defaultHeader(

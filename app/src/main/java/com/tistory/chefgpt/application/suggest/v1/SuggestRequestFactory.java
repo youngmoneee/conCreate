@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class RequestFactory {
+public class SuggestRequestFactory {
   private final Prompt.GptPrompt gptPrompt;
 
   public RequestChatDto create(final Provider p) {
