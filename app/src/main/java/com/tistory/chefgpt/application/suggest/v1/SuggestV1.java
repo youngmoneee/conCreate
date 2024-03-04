@@ -1,6 +1,6 @@
 package com.tistory.chefgpt.application.suggest.v1;
 
-import com.tistory.chefgpt.application.Suggestable;
+import com.tistory.chefgpt.application.suggest.Suggestable;
 import com.tistory.chefgpt.application.suggest.data.Provider;
 import com.tistory.chefgpt.application.suggest.data.res.ResponseChatDto;
 import com.tistory.chefgpt.util.api.WebClientFactory;
