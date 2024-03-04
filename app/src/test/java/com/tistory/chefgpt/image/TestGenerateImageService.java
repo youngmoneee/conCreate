@@ -1,6 +1,7 @@
 package com.tistory.chefgpt.image;
 
 import com.tistory.chefgpt.application.image.Generatable;
+import com.tistory.chefgpt.application.image.data.res.ResponseImageDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,12 @@ public class TestGenerateImageService {
   public void diTest() {
     assertThat(this.service).isNotNull();
     assertThat(this.service).isInstanceOf(Generatable.class);
+  }
+
+  @Test
+  @DisplayName("Image 생성 서비스")
+  public void gen() {
+    ResponseImageDto res = this.service.generate("퀘사디아").block();
+    System.out.println(res);
   }
 }

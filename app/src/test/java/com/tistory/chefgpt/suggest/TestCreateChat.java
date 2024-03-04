@@ -6,7 +6,7 @@ import com.tistory.chefgpt.application.suggest.data.ContentDto;
 import com.tistory.chefgpt.application.suggest.data.req.RequestChatDto;
 import com.tistory.chefgpt.application.suggest.data.Provider;
 import com.tistory.chefgpt.application.suggest.data.res.ResponseChatDto;
-import com.tistory.chefgpt.application.suggest.v1.RequestFactory;
+import com.tistory.chefgpt.application.suggest.v1.SuggestRequestFactory;
 import com.tistory.chefgpt.util.api.Secrets;
 import com.tistory.chefgpt.util.api.WebClientFactory;
 import com.tistory.chefgpt.util.api.WebClientFactory.App;
@@ -23,11 +23,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("메뉴 추천 테스트")
 public class TestCreateChat {
   private final Secrets secrets;
-  private final RequestFactory requestFactory;
+  private final SuggestRequestFactory requestFactory;
   private final WebClientFactory webClientFactory;
 
   @Autowired
-  public TestCreateChat(Secrets v1, RequestFactory v2, WebClientFactory v3) {
+  public TestCreateChat(Secrets v1, SuggestRequestFactory v2, WebClientFactory v3) {
     this.secrets = v1;
     this.requestFactory = v2;
     this.webClientFactory = v3;
@@ -39,7 +39,7 @@ public class TestCreateChat {
     assertThat(this.secrets).isNotNull();
     assertThat(this.secrets).isInstanceOf(Secrets.class);
     assertThat(this.requestFactory).isNotNull();
-    assertThat(this.requestFactory).isInstanceOf(RequestFactory.class);
+    assertThat(this.requestFactory).isInstanceOf(SuggestRequestFactory.class);
   }
 
   @Test
